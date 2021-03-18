@@ -1,14 +1,17 @@
 import Piece from './Piece.js';
 
-var newPiece = new Piece(0, 0);
-
 class Board {
-  constructor() {
+  constructor(canvas) {
+    this.canvas = canvas;
     this.board = this.createBoard();
   }
 
   createBoard() {
+    var board = Array(64);
 
+    board[0] = new Piece(0, 0, this.canvas);
+
+    return board;
   }
 
   show(ctx) {
@@ -28,12 +31,11 @@ class Board {
       }
     }
 
-    // for(var file = 0; file < 8; file++) {
-    //   for(var rank = 0; rank < 8; rank++) {
-
-        newPiece.show(ctx);
-    //   }
-    // }
+    for(var i = 0; i < this.board.length; i++) {
+      if(this.board[i] !== undefined) {
+        this.board[i].show(ctx);
+      }
+    }
     
   }
 
